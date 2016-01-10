@@ -1,0 +1,29 @@
+{
+  "name": "email_templates",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "veeteshjain <veetesh.jain@snapdeal.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.8",
+    "angular-material": "~1.0.1",
+    "bootstrap": "~3.3.6",
+    "angular-ui-bootstrap": "~0.14.3",
+    "angular-bootstrap": "~0.14.3",
+    "angular-route": "~1.4.8",
+    "components-font-awesome": "~4.5.0",
+    "jquery": "~2.2.0"
+  }
+}

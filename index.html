@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" data-ng-app="pdpApp" class="no-js">
+<!--<![endif]-->
+
+<head>
+    <base href="{{config.baseUrl}}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <script data-main="main" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script data-main="main" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script data-main="main" src="bower_components/angular/angular.min.js"></script>
+    <script data-main="main" src="bower_components/angular-material/angular-material.min.js"></script>
+    <link rel="stylesheet" href="public/css/pdpApp.css">
+    <script data-main="main" src="public/js/pdpApp.js"></script>
+</head>
+
+<body data-ng-controller="pdpAppCtrl">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="nav nav-pills pdp-nav">
+                <li role="presentation" class="active"><a>HOME</a></li>
+                <li role="presentation"><a>BRANDS</a></li>
+                <li role="presentation"><a>DESIGNERS</a></li>
+                <li role="presentation"><a>CONTACT</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pdp-filter">
+                <dl>
+                    <dt>CART</dt>
+                    <dd>0 item in Cart</dd>
+                    <dt>CATEGORIES</dt>
+                    <dd>
+                        <ul class="list-unstyled">
+                            <li data-ng-repeat="categorie in categories">
+                                <input type="checkbox">{{categorie}}
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-9 pdp-list">
+                <div class="row pdp-meta">
+                    Showing 1–9 of 48 results
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4" data-ng-repeat="product in products">
+                        <div class="thumbnail product-thumbnail pos-rel">
+                            <img ng-src="{{product.images[0]}}" alt="product.name">
+                            <div class="image_overlay"></div>
+                            <div class="actions">
+                                <div class="actions-btn">
+                                    ADD TO CART
+                                </div>
+                                <div class="actions-btn">
+                                    VIEW GALLERY
+                                </div>
+                            </div>
+                            <div class="caption caption-min-max bg-white">
+                                <dl>
+                                    <dt>{{::product.name}}</dt>
+                                    <dd>{{::product.category}}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>SIZE</dt>
+                                    <dd>{{product.size.join(', ')}}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>COLORS</dt>
+                                    <dd>
+                                        <ul class="product-color list-inline">
+                                            <li data-ng-repeat="color in product.colors" style="background:{{color}}"></li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
