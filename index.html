@@ -21,6 +21,7 @@
     <script data-main="main" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script data-main="main" src="bower_components/angular/angular.min.js"></script>
     <script data-main="main" src="bower_components/angular-material/angular-material.min.js"></script>
+    <script data-main="main" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <link rel="stylesheet" href="public/css/pdpApp.css">
     <script data-main="main" src="public/js/pdpApp.js"></script>
 </head>
@@ -32,17 +33,20 @@
     <div class="container-fluid">
         <div class="row">
             <ul class="nav nav-pills pdp-nav">
-                <li role="presentation" class="active"><a>HOME</a></li>
+                <li role="presentation"><a>HOME</a></li>
                 <li role="presentation"><a>BRANDS</a></li>
                 <li role="presentation"><a>DESIGNERS</a></li>
                 <li role="presentation"><a>CONTACT</a></li>
+
+                <li role="presentation" class="nav-icon pull-right"><a><span class="fa fa-search"></span></a></li>
+                <li role="presentation" class="nav-icon pull-right"><a><span class="fa fa-heart-o"></span></a></li>
             </ul>
         </div>
         <div class="row">
-            <div class="col-md-3 pdp-filter">
+            <div class="col-md-2 pdp-filter">
                 <dl>
-                    <dt>CART</dt>
-                    <dd>0 item in Cart</dd>
+                    <dt>CART <span class="fa fa-cart-arrow-down"></span></dt>
+                    <dd>{{myCart.length}} item in Cart</dd>
                     <dt>CATEGORIES</dt>
                     <dd>
                         <ul class="list-unstyled">
@@ -53,26 +57,37 @@
                     </dd>
                 </dl>
             </div>
-            <div class="col-md-9 pdp-list">
+            <div class="col-md-10 pdp-list">
                 <div class="row pdp-meta">
-                    Showing 1–9 of 48 results
+                    <div class="pull-left">
+                        Showing 1–{{products.length}} of {{products.length}} results
+                    </div>
+                    <div class="pull-right small-large-product" data-ng-init="isLarge = true">
+                        <span class="fa fa-th {{isLarge ? '' : 'active'}}" data-ng-click="isLarge = false"></span>
+                        <span class="fa fa-th-large {{isLarge ? 'active' : ''}}" data-ng-click="isLarge = true"></span>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-md-4" data-ng-repeat="product in products">
-                        <div class="thumbnail product-thumbnail pos-rel">
-                            <img ng-src="{{product.images[0]}}" alt="product.name">
-                            <div class="image_overlay"></div>
-                            <div class="actions">
-                                <div class="actions-btn">
+                    <div class="col-sm-6 {{isLarge ? 'col-md-6' : 'col-md-4'}}" data-ng-repeat="product in products">
+                        <div class="thumbnail product-thumbnail pos-rel" data-ng-hide="isLarge">
+                            <uib-carousel interval="0" no-wrap="noWrapSlides">
+                                <uib-slide ng-repeat="image in product.images">
+                                    <span class="viewGalleryClose fa fa-times" aria-hidden="true" data-ng-click="product.viewGallery = false" data-ng-show="product.viewGallery"></span>
+                                    <img ng-src="{{image}}" style="margin:auto;">
+                                </uib-slide>
+                            </uib-carousel>
+                            <div class="image_overlay" data-ng-hide="product.viewGallery"></div>
+                            <div class="actions" data-ng-hide="product.viewGallery">
+                                <div class="actions-btn" data-ng-click="addToCart(product)">
                                     ADD TO CART
                                 </div>
-                                <div class="actions-btn">
+                                <div class="actions-btn" data-ng-click="product.viewGallery = true">
                                     VIEW GALLERY
                                 </div>
                             </div>
-                            <div class="caption caption-min-max bg-white">
+                            <div class="caption caption-min-max bg-white" data-ng-hide="product.viewGallery">
                                 <dl>
-                                    <dt>{{::product.name}}</dt>
+                                    <dt>{{product.name.length>30 ? product.name.slice(0,30)+'...' : product.name}} <span class="product-price pull-right">${{::product.price}}</span></dt>
                                     <dd>{{::product.category}}</dd>
                                 </dl>
                                 <dl>
@@ -87,6 +102,49 @@
                                         </ul>
                                     </dd>
                                 </dl>
+                            </div>
+                        </div>
+                        <div class="row product-large" data-ng-hide="!isLarge">
+                            <div class="col-md-6 no-padding">
+                                <div class="thumbnail product-thumbnail-large pos-rel">
+                                    <div class="large-img">
+                                        <uib-carousel interval="0" no-wrap="noWrapSlides">
+                                            <uib-slide ng-repeat="image in product.images">
+                                                <img ng-src="{{image}}" style="margin:auto;">
+                                            </uib-slide>
+                                        </uib-carousel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 no-padding">
+                                <div class="thumbnail product-thumbnail-large pos-rel">
+                                    <div class="caption bg-white">
+                                        <dl>
+                                            <dt>{{product.name}}</dt>
+                                            <dd>{{::product.category}}</dd>
+                                            <dt><span class="product-price">${{::product.price}}</span></dt>
+                                        </dl>
+                                        <dl>
+                                            <dt>SIZE</dt>
+                                            <dd>{{product.size.join(', ')}}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>COLORS</dt>
+                                            <dd>
+                                                <ul class="product-color list-inline">
+                                                    <li data-ng-repeat="color in product.colors" style="background:{{color}}"></li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dd>
+                                                <div class="add-cart-large" data-ng-click="addToCart(product)">
+                                                    ADD TO CART
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

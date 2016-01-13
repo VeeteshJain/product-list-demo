@@ -1,6 +1,19 @@
 .pdp-nav {
-    padding: 25px;
     border-bottom: 1px solid #EEEEEE;
+}
+
+.pdp-nav li{
+    line-height: 50px;
+}
+
+.nav-icon{
+    font-size: 20px;
+    border-left: 1px solid #222;
+}
+
+.pdp-nav a {
+    color: #222;
+    font-weight: 700;
 }
 
 .pdp-nav>li>a:focus,
@@ -9,8 +22,8 @@
     background-color: transparent !important;
 }
 
-.pdp-filter dt{
-	margin-top: 40px;
+.pdp-filter dt {
+    margin-top: 40px;
 }
 
 .pdp-list {
@@ -59,6 +72,23 @@
 .product-thumbnail {
     padding: 0px;
     border-radius: 0px;
+    border: 0px !important;
+}
+
+.product-large {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.product-large:hover {
+    box-shadow: 0px 5px 31px -1px rgba(0, 0, 0, 0.15);
+}
+
+.product-thumbnail-large {
+    height: 370px;
+    padding: 0px;
+    border-radius: 0px;
+    border: 0px !important;
 }
 
 .pos-rel {
@@ -114,4 +144,68 @@
     -moz-transition: all 200ms ease-out;
     -o-transition: all 200ms ease-out;
     transition: all 200ms ease-out;
+}
+
+.small-large-product {
+    color: #b3b3b3;
+    font-size: 22px;
+}
+
+.small-large-product .active {
+    color: #222222;
+}
+
+.product-price {
+    color: #5ff7d2;
+    font-size: 20px;
+}
+
+.add-cart-large {
+    border: 3px solid #000;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 12px;
+    background: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px;
+    font-family: "Open Sans", sans-serif;
+    width: 180px;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
+
+.add-cart-large:hover {
+    color: #5ff7d2;
+    border-color: #5ff7d2;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+    cursor: pointer;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.large-img {
+    height: 368px !important;
+}
+
+.mini {
+    height: 70px;
+    top: 50%;
+    margin-top: -35px;
+}
+
+.viewGalleryClose {
+    position: absolute;
+    right: 15px;
+    font-size: 30px;
+    top: 5px;
 }
